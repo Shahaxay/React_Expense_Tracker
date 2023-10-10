@@ -6,6 +6,7 @@ const ExpenseList = (props) => {
     if (props.items.length === 0) {
         return <h2 className="expenses-list__fallback">No Exception Found</h2>
     }
+    const singleExpenseMessage=<h2 className="expenses-list__fallback">Only single Expense here. Please add more...</h2>
     return (
         <ul className="expense-list">
             {props.items.map((expense) =>
@@ -17,6 +18,7 @@ const ExpenseList = (props) => {
                     date={expense.date}
                 />
             )}
+            {props.items.length===1 && singleExpenseMessage}
         </ul>
     );
 }
