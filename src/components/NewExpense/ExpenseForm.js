@@ -47,7 +47,7 @@ const ExpenseForm = (props) => {
     if(!flag){
         return(
             <div className='new-expense__display'>
-                <button onClick={showForm}>Add Expense</button>
+                <button onClick={showForm}>Add New Expense</button>
             </div>
         );
     }
