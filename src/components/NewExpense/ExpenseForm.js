@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css'
+import Expenses from '../Expenses/Expenses';
 const ExpenseForm = () => {
     const minDate = '2019-01-02';
     const maxDate = '2023-10-10';
@@ -12,7 +13,7 @@ const ExpenseForm = () => {
     //event deligation
     const formIntputChangeHandler = (e) => {
         const value = e.target.value
-        console.log(value);
+        // console.log(value);
         switch (e.target.getAttribute('id')) {
             case 'title': setEnteredTitle(value); break;
             case 'amount': setEnteredAmount(value); break;
@@ -20,8 +21,17 @@ const ExpenseForm = () => {
             default: console.log("input other than tile amount date changes");
         }
     }
+    const formSubmitHandler=(e)=>{
+        e.preventDefault();
+        const expenseObj={
+            title:enteredTitle,
+            amount:enteredAmount,
+            date:new Date(enteredDate).toLocaleDateString()
+        }
+        console.log(expenseObj);
+    }
     return (
-        <form className='new-expense__controls' onChange={formIntputChangeHandler}>
+        <form className='new-expense__controls' onChange={formIntputChangeHandler}onSubmit={formSubmitHandler} >
             <div className='new-expense__control'>
                 <label for="title">Expense Title</label>
                 <input type="text" id="title" value={enteredTitle}/>
