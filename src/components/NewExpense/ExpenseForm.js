@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css'
-import Expenses from '../Expenses/Expenses';
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
     const minDate = '2019-01-02';
     const maxDate = '2023-10-10';
     const minAmount = 0;
@@ -10,14 +9,15 @@ const ExpenseForm = () => {
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount,setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
+    const [enteredLocation, setEnteredLocation] = useState('');
     //event deligation
     const formIntputChangeHandler = (e) => {
         const value = e.target.value
-        // console.log(value);
         switch (e.target.getAttribute('id')) {
             case 'title': setEnteredTitle(value); break;
             case 'amount': setEnteredAmount(value); break;
             case 'date': setEnteredDate(value); break;
+            case 'location': setEnteredLocation(value); break;
             default: console.log("input other than tile amount date changes");
         }
     }
@@ -26,9 +26,15 @@ const ExpenseForm = () => {
         const expenseObj={
             title:enteredTitle,
             amount:enteredAmount,
-            date:new Date(enteredDate).toLocaleDateString()
+            date:new Date(enteredDate),
+            location:enteredLocation
         }
-        console.log(expenseObj);
+        props.onSaveExpenseData(expenseObj);
+        //clearing form
+        setEnteredAmount('');
+        setEnteredTitle('');
+        setEnteredDate('');
+        setEnteredLocation('');
     }
     return (
         <form className='new-expense__controls' onChange={formIntputChangeHandler}onSubmit={formSubmitHandler} >
@@ -43,6 +49,10 @@ const ExpenseForm = () => {
             <div className='new-expense__control'>
                 <label for="date">Date</label>
                 <input type="date" id="date" min={minDate} max={maxDate} value={enteredDate}/>
+            </div>
+            <div className='new-expense__control'>
+                <label for="location">Location</label>
+                <input type="text" id="location" value={enteredLocation}/>
             </div>
             <div className='new-expense__actions'>
                 <button type="submit">Add Expense</button>
