@@ -13,12 +13,26 @@ const App = () => {
     // console.log(expense);
     updateExpensesOnScreen(prevExpenses=>{return[expense,...prevExpenses]});
   }
-  console.log(expenses);
+  // console.log(expenses);
+
+  /* applying filter concept*/
+
+  const [selectedYear,getSelectedYearExpenses]=useState("2020");
+
+  const filteredExpenses=expenses.filter(expense=>{
+    return expense.date.getFullYear().toString()===selectedYear;
+  })
+  // console.log(filteredExpenses);
+
+  const filterChangedHandler=(year)=>{
+    getSelectedYearExpenses(year);
+  }
+
   return (
     <div>
       <h2>Let's get started</h2>
       <NewExpense onAddExpense={addExpenseDataHandler}/>
-      <Expenses expenses={expenses}/>
+      <Expenses expenses={filteredExpenses} onFilterChanged={filterChangedHandler}/>
     </div>
   );
 }
