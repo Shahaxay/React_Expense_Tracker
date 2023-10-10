@@ -5,11 +5,11 @@ import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
 const Expenses = (props) => {
   const expenses=props.expenses;
-  // console.log(expenses);
+  console.log("EXPences:",expenses);
   const expenseItem = expenses.map((expense) => {
     return (
       <ExpenseItem
-        id={expense.id}
+        key={expense.id}
         title={expense.title}
         location={expense.location}
         amount={expense.amount}

@@ -25,9 +25,9 @@ const ExpenseForm = (props) => {
         e.preventDefault();
         const expenseObj={
             title:enteredTitle,
+            location:enteredLocation,
             amount:enteredAmount,
             date:new Date(enteredDate),
-            location:enteredLocation
         }
         props.onSaveExpenseData(expenseObj);
         //clearing form
