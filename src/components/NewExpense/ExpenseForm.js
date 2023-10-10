@@ -36,6 +36,21 @@ const ExpenseForm = (props) => {
         setEnteredDate('');
         setEnteredLocation('');
     }
+    /* Implementing switching between two form*/
+    const [flag,setFlag]=useState(false);
+    const hideForm=(e)=>{
+        setFlag(false);
+    }
+    const showForm=(e)=>{
+        setFlag(true);
+    }
+    if(!flag){
+        return(
+            <div className='new-expense__display'>
+                <button onClick={showForm}>Add Expense</button>
+            </div>
+        );
+    }
     return (
         <form className='new-expense__controls' onChange={formIntputChangeHandler}onSubmit={formSubmitHandler} >
             <div className='new-expense__control'>
@@ -55,8 +70,12 @@ const ExpenseForm = (props) => {
                 <input type="text" id="location" value={enteredLocation}/>
             </div>
             <div className='new-expense__actions'>
+                <button onClick={hideForm}>Cancel</button>
+            </div>
+            <div className='new-expense__actions'>
                 <button type="submit">Add Expense</button>
             </div>
+
         </form>
     );
 }
